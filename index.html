@@ -22,13 +22,12 @@
             --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* FIX: Global reset to remove underlines from all interactive elements */
         * { 
             margin: 0; 
             padding: 0; 
             box-sizing: border-box; 
             font-family: 'Plus Jakarta Sans', sans-serif; 
-            text-decoration: none !important; /* This removes underlines from all links/buttons */
+            text-decoration: none !important; 
         }
 
         html { scroll-behavior: smooth; }
@@ -43,15 +42,15 @@
             border-bottom: 1px solid rgba(255,255,255,0.3);
         }
         
-        .nav-links { display: flex; gap: 32px; }
+        .nav-links { display: flex; gap: 32px; list-style: none; }
         .nav-links a { color: var(--slate); font-weight: 700; font-size: 0.9rem; cursor: pointer; transition: var(--transition); border: none; outline: none; }
         .nav-links a:hover { color: var(--orange); }
 
+        /* Mobile Menu Toggle */
+        .menu-toggle { display: none; font-size: 1.5rem; color: var(--dark); cursor: pointer; }
+
         .logo-container { display: flex; align-items: center; cursor: pointer; border: none; }
-        
-        .brand-pill { 
-            font-size: 1.6rem; font-weight: 800; color: var(--dark); letter-spacing: -1px; 
-        }
+        .brand-pill { font-size: 1.6rem; font-weight: 800; color: var(--dark); letter-spacing: -1px; }
         .brand-pill span { color: var(--orange); }
 
         /* --- 3. Hero Section --- */
@@ -62,17 +61,16 @@
         
         .hero-images { flex: 1; display: flex; gap: 20px; }
         .img-large { width: 320px; height: 450px; border-radius: 30px; overflow: hidden; border: 8px solid white; box-shadow: var(--shadow-md); }
-        .img-small { width: 240px; height: 210px; border-radius: 24px; overflow: hidden; border: 6px solid white; box-shadow: var(--shadow-md); }
+        .img-small { width: 240px; height: 210px; border-radius: 24px; overflow: hidden; border: 6px solid white; box-shadow: var(--shadow-md); margin-bottom: 20px;}
         img { width: 100%; height: 100%; object-fit: cover; }
 
         /* --- 4. Course Cards --- */
         .classes-section { padding: 80px 10%; }
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; margin-top: 50px; }
-        .card { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(10px); border-radius: 24px; border: 1px solid rgba(255, 255, 255, 0.5); overflow: hidden; transition: var(--transition); }
+        .card { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(100px); border-radius: 24px; border: 1px solid rgba(255, 255, 255, 0.5); overflow: hidden; transition: var(--transition); }
         .card:hover { transform: translateY(-12px); box-shadow: 0 30px 60px -12px rgba(0,0,0,0.1); border-color: var(--yellow); }
         .card-body { padding: 30px; }
         
-        /* FIX: Removed potential button outlines and underlines */
         .enroll-btn { 
             display: block; text-align: center; padding: 15px; background: rgba(255,255,255,0.5); 
             color: var(--dark); font-weight: 700; border-radius: 12px; margin-top: 20px; 
@@ -119,10 +117,26 @@
             60% { transform: translateY(-10px); }
         }
 
+        /* Responsive Mobile Styling */
         @media (max-width: 768px) {
+            .menu-toggle { display: block; order: 1; }
+            .logo-container { order: 2; }
+            .brand-pill { display: none; } /* Hide text logo on mobile to save space */
+            
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 70px; left: 0; width: 100%;
+                background: white; padding: 20px;
+                box-shadow: var(--shadow-md);
+                gap: 20px;
+                text-align: center;
+            }
+            .nav-links.active { display: flex; }
+            
             .hero { flex-direction: column; text-align: center; padding: 40px 5%; }
             .hero-images { display: none; }
-            .nav-links { display: none; }
             nav.navbar { padding: 15px 5%; }
             .whatsapp-float { padding: 12px 20px; right: 20px; bottom: 20px; }
         }
@@ -149,17 +163,20 @@
     </div>
 
     <nav class="navbar">
+        <div class="menu-toggle" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
+        
         <div class="logo-container" onclick="showPage('home')">
             <svg style="width:45px; height:45px;" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                 <path d="M50 15 L85 75 L15 75 Z" fill="#f59e0b" />
                 <rect x="25" y="80" width="50" height="8" rx="4" fill="#facc15" />
             </svg>
         </div>
-        <ul class="nav-links">
+
+        <ul class="nav-links" id="navLinks">
             <li><a onclick="showPage('home')">Home</a></li>
-            <li><a href="#courses">Courses</a></li>
+            <li><a href="#courses" onclick="toggleMenu()">Courses</a></li>
             <li><a onclick="showPage('results')">Results</a></li>
-            <li><a href="#footer">Contact</a></li>
+            <li><a href="#footer" onclick="toggleMenu()">Contact</a></li>
         </ul>
         <div class="brand-pill">APEX<span>IOE</span></div>
     </nav>
@@ -167,21 +184,18 @@
     <div id="home-page">
         <section class="hero">
             <div class="hero-content">
-                <span style="color: var(--orange); font-weight: 800; text-transform: uppercase; font-size: 2rem; letter-spacing: 2px;"><b>බිබිලේ #1 අද්‍යාපන ආයතනය</span>
-                <h1>APEX<span>INSTITUTE </span>OF EDUCATION.</h1>
-                <p><span style="font-size: 1.3rem;"> 100 පමණ ආසන්න, අතිදක්ශ ළමයින් හා නව තාක්ෂණික මෙවලම් බාවිතා කරමින් ඉගැන්වීම් කටයුතු සිදුවේ.</span></p>
+                <span style="color: var(--orange); font-weight: 800; text-transform: uppercase; font-size: 1.2rem; letter-spacing: 2px;">බිබිලේ #1 අද්‍යාපන ආයතනය</span>
+                <h1>APEX<span> INSTITUTE </span>OF EDUCATION.</h1>
+                <p><span style="font-size: 1.1rem;"> 100 පමණ ආසන්න, අතිදක්ශ ළමයින් හා නව තාක්ෂණික මෙවලම් බාවිතා කරමින් ඉගැන්වීම් කටයුතු සිදුවේ.</span></p>
             </div>
             <div class="hero-images">
                 <div class="img-large">
-    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600">
-  </div>
-
-  <div class="side-column">
-    <div class="img-small">
-      <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=400">
-    </div>
-    <div class="img-small">
-      <img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=400">
+                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600">
+                </div>
+                <div class="side-column">
+                    <div class="img-small"><img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=400"></div>
+                    <div class="img-small"><img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=400"></div>
+                </div>
             </div>
         </section>
 
@@ -247,9 +261,19 @@
     </a>
 
     <script>
+        // Toggle mobile menu
+        function toggleMenu() {
+            const nav = document.getElementById('navLinks');
+            if(window.innerWidth <= 768) {
+                nav.classList.toggle('active');
+            }
+        }
+
         function showPage(page) {
             document.getElementById('home-page').style.display = (page === 'home') ? 'block' : 'none';
             document.getElementById('results-page').style.display = (page === 'results') ? 'block' : 'none';
+            // Close mobile menu when a page is selected
+            document.getElementById('navLinks').classList.remove('active');
             window.scrollTo(0,0);
         }
 
@@ -277,10 +301,9 @@
         }
 
         function confirmEnrollment() {
+            // Alert message removed as per request
             closePopup('courseModal');
-            setTimeout(() => alert('Enrolled Successfully!'), 500);
         }
     </script>
 </body>
 </html>
-
