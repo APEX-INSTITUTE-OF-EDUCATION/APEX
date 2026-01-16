@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>APEX Institute OF Education</title>
     <link rel="icon" type="image/png" href="https://lh3.googleusercontent.com/pw/AP1GczNkMciS11Pzwxjk8ah9bHmu7iw1c9rw0uxaK4srSqQ9sn1QMUleC33g9thtq7KlDSUBmLHAzQJ86oxTSLWBpj_nQcgYe6yqqv6WgJhYojef-RVcvf1o7_1d1pRKISOwdSXu0vK_3rvaPtnCzCNTT95_=w913-h913-s-no-gm">
     
@@ -23,6 +23,14 @@
             --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
+        .no-scroll {
+            overflow: hidden !important;
+            height: 100% !important;
+            position: fixed !important; 
+            width: 100% !important;
+            touch-action: none !important;
+        }
+
         * { 
             margin: 0; padding: 0; box-sizing: border-box; 
             font-family: 'Plus Jakarta Sans', sans-serif; 
@@ -32,150 +40,182 @@
         html { scroll-behavior: smooth; }
         body { background: var(--bg-grad); background-attachment: fixed; color: var(--dark); line-height: 1.6; overflow-x: hidden; min-height: 100vh; }
 
-        /* --- Navbar --- */
         nav.navbar {
             background: rgba(255, 255, 255, 0.6); 
             backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
             padding: 15px 10%; display: flex; justify-content: space-between; align-items: center;
             box-shadow: var(--shadow-sm); position: sticky; top: 0; z-index: 1000;
             border-bottom: 1px solid rgba(255,255,255,0.3);
+            transition: var(--transition);
         }
         
         .nav-links { display: flex; gap: 32px; list-style: none; transition: var(--transition); align-items: center; }
-        .nav-links a { color: var(--slate); font-weight: 700; font-size: 0.9rem; cursor: pointer; transition: var(--transition); }
+        .nav-links a { color: var(--slate); font-weight: 700; font-size: 0.9rem; cursor: pointer; transition: var(--transition); position: relative; }
         .nav-links a:hover { color: var(--orange); }
 
-        /* --- New Grade Dropdown CSS --- */
-        .dropdown { position: relative; }
+        .dropdown { position: relative; display: flex; align-items: center; }
+        .dropdown > a { color: var(--orange) !important; display: flex; align-items: center; gap: 5px; }
+
         .dropdown-content {
-            display: none;
+            display: block; 
             position: absolute;
             top: 100%;
-            left: 0;
+            left: 50%;
+            transform: translateX(-50%) translateY(10px);
             background: white;
-            min-width: 150px;
+            min-width: 160px;
             box-shadow: var(--shadow-md);
             border-radius: 12px;
             padding: 10px 0;
             z-index: 1001;
             max-height: 300px;
             overflow-y: auto;
+            margin-top: 10px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
         }
-        .dropdown:hover .dropdown-content { display: block; }
+
+        .dropdown.open .dropdown-content { 
+            opacity: 1; 
+            visibility: visible; 
+            transform: translateX(-50%) translateY(0);
+        }
+
         .dropdown-content a {
             display: block;
             padding: 10px 20px;
             color: var(--slate) !important;
             font-size: 0.85rem;
+            text-align: center;
         }
         .dropdown-content a:hover { background: #fffbeb; color: var(--orange) !important; }
 
-        .menu-toggle { display: none; font-size: 1.5rem; color: var(--dark); cursor: pointer; z-index: 1001; }
-
-        .logo-container { display: flex; align-items: center; cursor: pointer; }
-        
-        .header-logo-img {
-            width: 45px;
-            height: 45px;
-            object-fit: contain;
-            border-radius: 8px;
+        #home-page, #all-classes-page, #results-page {
+            animation: pageEntry 0.5s ease-out forwards;
         }
 
+        @keyframes pageEntry {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .menu-toggle { display: none; font-size: 1.5rem; color: var(--dark); cursor: pointer; z-index: 1001; }
+        .logo-container { display: flex; align-items: center; cursor: pointer; transition: transform 0.3s ease; }
+        .logo-container:hover { transform: scale(1.05); }
+        .header-logo-img { width: 45px; height: 45px; object-fit: contain; border-radius: 8px; }
         .brand-pill { font-size: 1.6rem; font-weight: 800; color: var(--dark); letter-spacing: -1px; margin-left: 10px; }
         .brand-pill span { color: var(--orange); }
 
-        /* --- Sections --- */
         .hero { display: flex; align-items: center; padding: 80px 10%; gap: 60px; }
         .hero-content { flex: 1.2; }
         .hero h1 { font-size: clamp(2.5rem, 5vw, 4rem); line-height: 1.1; font-weight: 800; margin-bottom: 25px; }
         .hero h1 span { background: var(--primary-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        
         .hero-images { flex: 1; display: flex; justify-content: center; }
-        .img-feature { 
-            width: 100%; 
-            max-width: 550px; 
-            border-radius: 40px; 
-            overflow: hidden; 
-            border: 10px solid white; 
-            box-shadow: var(--shadow-md); 
-        }
+        .img-feature { width: 100%; max-width: 550px; border-radius: 40px; overflow: hidden; border: 10px solid white; box-shadow: var(--shadow-md); transition: var(--transition); }
+        .img-feature:hover { transform: scale(1.02); }
         img { width: 100%; height: 100%; object-fit: cover; }
 
         .classes-section { padding: 80px 10%; }
         .section-header { display: flex; flex-direction: column; align-items: center; gap: 20px; margin-bottom: 50px; }
-        
-        .all-classes-btn { 
-            background: var(--primary-grad); color: white; padding: 12px 30px; 
-            border-radius: 50px; font-weight: 700; border: none; cursor: pointer;
-            box-shadow: var(--shadow-sm); transition: var(--transition);
-        }
+        .all-classes-btn { background: var(--primary-grad); color: white; padding: 12px 30px; border-radius: 50px; font-weight: 700; border: none; cursor: pointer; box-shadow: var(--shadow-sm); transition: var(--transition); }
         .all-classes-btn:hover { transform: scale(1.05); box-shadow: var(--shadow-md); }
 
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; }
         .card { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(10px); border-radius: 24px; border: 1px solid rgba(255, 255, 255, 0.5); overflow: hidden; transition: var(--transition); }
         .card:hover { transform: translateY(-12px); box-shadow: 0 30px 60px -12px rgba(0,0,0,0.1); border-color: var(--yellow); }
         .card-body { padding: 30px; }
-        
-        .enroll-btn { 
-            display: block; text-align: center; padding: 15px; background: rgba(255,255,255,0.5); 
-            color: var(--dark); font-weight: 700; border-radius: 12px; margin-top: 20px; 
-            border: 1px solid #e2e8f0; cursor: pointer; width: 100%; transition: var(--transition);
-        }
+        .enroll-btn { display: block; text-align: center; padding: 15px; background: rgba(255,255,255,0.5); color: var(--dark); font-weight: 700; border-radius: 12px; margin-top: 20px; border: 1px solid #e2e8f0; cursor: pointer; width: 100%; transition: var(--transition); }
         .card:hover .enroll-btn { background: var(--primary-grad); color: white; border-color: transparent; }
 
         #results-page, #all-classes-page { display: none; padding: 100px 10%; min-height: 80vh; }
         .results-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 25px; margin-top: 40px; justify-items: center; }
         .res-img-wrap { width: 100%; max-width: 280px; aspect-ratio: 4/3; border-radius: 18px; overflow: hidden; box-shadow: var(--shadow-md); cursor: pointer; transition: var(--transition); border: 4px solid white; }
 
-        .modal-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(8px);
-            display: none; align-items: center; justify-content: center; z-index: 3000; opacity: 0; transition: opacity 0.4s ease;
-        }
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(8px); display: none; align-items: center; justify-content: center; z-index: 3000; opacity: 0; transition: opacity 0.4s ease; }
         .modal-overlay.show { opacity: 1; }
         .modal-box { background: white; width: 90%; max-width: 450px; border-radius: 32px; padding: 40px; position: relative; transform: scale(0.9); transition: var(--transition); }
         .modal-overlay.show .modal-box { transform: scale(1); }
-        
         #qvModal .modal-box { padding: 10px; max-width: 600px; background: none; border-radius: 15px; }
         #qv-img { width: 100%; height: auto; border-radius: 15px; border: 5px solid white; }
-
         .close-modal { position: absolute; top: 20px; right: 25px; font-size: 2rem; cursor: pointer; z-index: 10; }
         .info-row { display: flex; align-items: center; gap: 15px; padding: 12px 0; border-bottom: 1px solid #f1f5f9; }
         .confirm-btn { background: var(--primary-grad); color: white; padding: 18px; border-radius: 14px; font-weight: 700; border: none; cursor: pointer; width: 100%; margin-top: 30px; }
 
-        .whatsapp-float { 
-            position: fixed; bottom: 30px; right: 30px; background: #22c55e; color: white; 
-            padding: 16px 40px; border-radius: 100px; font-weight: 700; display: flex; 
-            align-items: center; gap: 12px; z-index: 2000; box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-            animation: jump 2.5s infinite ease-in-out;
-            outline: none;
-        }
+        .whatsapp-float { position: fixed; bottom: 30px; right: 30px; background: #22c55e; color: white; padding: 16px 40px; border-radius: 100px; font-weight: 700; display: flex; align-items: center; gap: 12px; z-index: 2000; box-shadow: 0 10px 20px rgba(0,0,0,0.2); animation: jump 2.5s infinite ease-in-out; outline: none; }
 
-        @keyframes jump {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-20px); }
-            60% { transform: translateY(-10px); }
-        }
+        @keyframes jump { 0%, 20%, 50%, 80%, 100% { transform: translateY(0); } 40% { transform: translateY(-20px); } 60% { transform: translateY(-10px); } }
 
         @media (max-width: 768px) {
-            .brand-pill { display: none; }
-            .menu-toggle { display: block; order: 2; }
-            .nav-links {
-                position: absolute; top: 100%; left: 0; width: 100%;
-                background: rgba(255, 255, 255, 0.98); 
-                flex-direction: column; padding: 0; gap: 0; overflow: hidden;
-                max-height: 0; opacity: 0; box-shadow: var(--shadow-md);
+            .brand-pill { 
+                display: block; 
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%);
+                margin-left: 0;
             }
-            .nav-links.active { max-height: 600px; opacity: 1; padding: 20px 0; }
-            .nav-links li { width: 100%; text-align: center; padding: 15px 0; }
-            .dropdown-content { position: static; box-shadow: none; display: none; }
-            .dropdown:hover .dropdown-content { display: block; }
+            .menu-toggle { display: block; order: 2; }
+            
+            .nav-links { 
+                position: absolute; 
+                top: 100%; 
+                left: 0; 
+                width: 100%; 
+                background: rgba(255, 255, 255, 0.98); 
+                flex-direction: column; 
+                padding: 10px 0; 
+                gap: 0; 
+                display: none; 
+                opacity: 0; 
+                box-shadow: var(--shadow-md); 
+                transition: opacity 0.3s ease; 
+            }
+            .nav-links.active { display: flex; opacity: 1; }
+
+            .nav-links li { 
+                width: 100%; 
+                display: flex;
+                justify-content: center;
+                padding: 15px 0; 
+            } 
+            
+            .dropdown > a {
+                justify-content: center;
+            }
+
+            .dropdown-content { 
+                position: absolute !important; 
+                top: 50px; 
+                left: 50%;
+                transform: translateX(-50%) translateY(10px);
+                display: block; 
+                width: 220px; 
+                background: white !important;
+                border: 1px solid #eee !important;
+                border-radius: 16px !important;
+            }
+
             .hero { flex-direction: column; text-align: center; padding: 40px 5%; }
             .hero-images { margin-top: 30px; }
             nav.navbar { padding: 15px 5%; }
         }
 
-        footer { background: var(--dark); color: white; padding: 60px 10%; text-align: center; }
+        footer { 
+            background: var(--dark); 
+            color: white; 
+            padding: 20px 10% 20px 10%; 
+            text-align: center; 
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            align-items: center;
+        }
+        footer p { margin: 0; width: 100%; }
+        .creator-container { display: flex; flex-direction: column; align-items: center; gap: 8px; margin-top: 10px; }
+        .creator-tag { font-size: 0.75rem; color: #94a3b8; opacity: 0.9; }
+        .social-links { display: flex; gap: 15px; }
+        .social-links a { color: #94a3b8; font-size: 0.9rem; transition: var(--transition); }
+        .social-links a:hover { color: var(--orange); transform: translateY(-3px); }
     </style>
 </head>
 <body>
@@ -204,10 +244,9 @@
         </div>
         <ul class="nav-links" id="navLinks">
             <li><a onclick="showPage('home')">Home</a></li>
-            <li class="dropdown">
-                <a>Grades <i class="fas fa-chevron-down"></i></a>
-                <div class="dropdown-content" id="grade-dropdown">
-                    </div>
+            <li class="dropdown" id="gradeDropdown">
+                <a onclick="toggleDropdown(event)">Grades <i class="fas fa-chevron-down"></i></a>
+                <div class="dropdown-content" id="grade-dropdown"></div>
             </li>
             <li><a onclick="showPage('all-classes')">All Classes</a></li>
             <li><a onclick="showPage('results')">Results</a></li>
@@ -236,15 +275,13 @@
                 <h2 style="font-size: 2.2rem; font-weight: 800; text-align: center;">සම්බන්ද විය හැකි පන්ති</h2>
                 <button class="all-classes-btn" onclick="showPage('all-classes')">View All Classes <i class="fas fa-arrow-right"></i></button>
             </div>
-            <div class="grid" id="featured-classes">
-                </div>
+            <div class="grid" id="featured-classes"></div>
         </section>
     </div>
 
     <div id="all-classes-page">
         <h2 id="all-classes-title" style="font-size: 2.5rem; font-weight: 800; text-align: center; margin-bottom: 50px;">All Available <span style="color: var(--orange)">Classes</span></h2>
-        <div class="grid" id="all-classes-grid">
-            </div>
+        <div class="grid" id="all-classes-grid"></div>
     </div>
 
     <div id="results-page">
@@ -257,9 +294,19 @@
     </div>
 
     <footer id="footer">
-        <div class="brand-pill" style="color: white; margin-bottom: 20px;">APEX<span>IOE</span></div>
-        <p>© 2026 APEX INSTITUTE OF EDUCATION</p>
-        <p>Hotline: +94 773 298 884</p>
+        <div class="brand-pill" style="color: white; margin-bottom: 5px;">APEX<span>IOE</span></div><br>
+        <p>© 2026 APEX INSTITUTE OF EDUCATION
+        <br>Hotline: +94 773 298 884
+        <div class="creator-container">
+            <p class="creator-tag">Created by Indusara Shashindu</p>
+            <div class="social-links">
+                <a href="https://facebook.com/YOUR_PROFILE" target="_blank"><i class="fab fa-facebook"></i></a>
+                <a href="https://youtube.com/@YOUR_CHANNEL" target="_blank"><i class="fab fa-youtube"></i></a>
+                <a href="https://instagram.com/@YOUR_CHANNEL" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://tiktok.com/@YOUR_CHANNEL" target="_blank"><i class="fab fa-tiktok"></i></a>
+                <a href="https://wa.me/9477321069" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            </div>
+        </div>
     </footer>
 
     <a href="https://wa.me/94773298884" class="whatsapp-float">
@@ -268,23 +315,51 @@
     </a>
 
     <script>
-        const classes = [
-            {t: 'Grade 06', p: '2,000', d: 'Tuesday 3:00 PM', i: 'Mrs. Dilini', img: 'https://images.unsplash.com/photo-1501504905252-473c47e087f8?auto=format&fit=crop&w=500'},
-            {t: 'Grade 07', p: '2,200', d: 'Thursday 4:00 PM', i: 'Mr. Saman', img: 'https://images.unsplash.com/photo-1501504905252-473c47e087f8?auto=format&fit=crop&w=500'},
-            {t: 'Grade 08', p: '2,200', d: 'Friday 3:30 PM', i: 'Mr. Saman', img: 'https://images.unsplash.com/photo-1501504905252-473c47e087f8?auto=format&fit=crop&w=500'},
-            {t: 'Grade 09', p: '2,500', d: 'Saturday 8:00 AM', i: 'Mr. Perera', img: 'https://images.unsplash.com/photo-1501504905252-473c47e087f8?auto=format&fit=crop&w=500'},
-            {t: 'Grade 10', p: '3,000', d: 'Sunday 8:00 AM', i: 'Mr. Kumara', img: 'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?auto=format&fit=crop&w=500'},
-            {t: 'Grade 11', p: '3,000', d: 'Monday 4:00 PM', i: 'Mr. Kumara', img: 'https://images.unsplash.com/photo-1501504905252-473c47e087f8?auto=format&fit=crop&w=500'},
-            {t: 'A/L Combined Maths', p: '4,500', d: 'Sat/Sun 1:00 PM', i: 'Mr. Silva', img: 'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=500'},
-            {t: 'A/L Physics', p: '4,500', d: 'Wednesday 3:00 PM', i: 'Mr. Bandara', img: 'https://images.unsplash.com/photo-1501504905252-473c47e087f8?auto=format&fit=crop&w=500'},
-            {t: 'A/L ICT', p: '4,000', d: 'Friday 5:00 PM', i: 'Mr. Jay', img: 'https://images.unsplash.com/photo-1501504905252-473c47e087f8?auto=format&fit=crop&w=500'}
-        ];
+        const classes = [];
+        const instructors = ['Mr. Saman', 'Mrs. Dilini', 'Mr. Perera', 'Mr. Kumara', 'Mr. Silva', 'Mr. Bandara'];
+        const times = ['Monday 4:00 PM', 'Tuesday 3:00 PM', 'Wednesday 3:30 PM', 'Thursday 4:00 PM', 'Friday 5:00 PM', 'Saturday 8:00 AM', 'Sunday 9:00 AM'];
 
-        // Init Grade Dropdown
+        for (let g = 1; g <= 11; g++) {
+            const gradeName = g < 10 ? `Grade 0${g}` : `Grade ${g}`;
+            for (let i = 1; i <= 3; i++) {
+                classes.push({
+                    t: gradeName, 
+                    p: (1500 + (g * 100)).toLocaleString(), 
+                    d: times[(g + i) % times.length], 
+                    i: instructors[(g + i) % instructors.length], 
+                    img: 'https://images.unsplash.com/photo-1501504905252-473c47e087f8?auto=format&fit=crop&w=500'
+                });
+            }
+        }
+
+        const alSubjects = ['Combined Maths', 'Physics', 'ICT'];
+        alSubjects.forEach((sub, idx) => {
+            for (let i = 1; i <= 3; i++) {
+                classes.push({
+                    t: `A/L ${sub}`, 
+                    p: '4,500', 
+                    d: times[(idx + i) % times.length], 
+                    i: instructors[(idx + i) % instructors.length], 
+                    img: 'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=500'
+                });
+            }
+        });
+
         const dropdown = document.getElementById('grade-dropdown');
-        for (let i = 1; i <= 11; i++) {
+        
+        // ADDED: Logic to group Grades 1-5
+        dropdown.innerHTML += `<a onclick="showGradeClasses('Grades 1-5')">Grades 1-5</a>`;
+        
+        // Individual Grades 6-11
+        for (let i = 6; i <= 11; i++) {
             const gradeText = i < 10 ? `Grade 0${i}` : `Grade ${i}`;
             dropdown.innerHTML += `<a onclick="showGradeClasses('${gradeText}')">Grade ${i}</a>`;
+        }
+
+        function toggleDropdown(e) {
+            e.stopPropagation();
+            const el = document.getElementById('gradeDropdown');
+            el.classList.toggle('open');
         }
 
         function renderClasses(targetId, dataList) {
@@ -293,8 +368,8 @@
                 <div class="card">
                     <div style="height:220px"><img src="${c.img}"></div>
                     <div class="card-body">
-                        <h3>${c.t} Batch</h3>
-                        <p style="color:var(--slate); font-size:0.9rem; margin-top: 10px;">Comprehensive syllabus coverage.</p>
+                        <h3>${c.t} Batch (${c.i})</h3>
+                        <p style="color:var(--slate); font-size:0.9rem; margin-top: 10px;">Scheduled for ${c.d}.</p>
                         <button class="enroll-btn" onclick="openPopup('${c.t}', 'LKR ${c.p}', '${c.d}', '${c.i}')">View Course Details</button>
                     </div>
                 </div>
@@ -302,25 +377,44 @@
         }
 
         function showGradeClasses(grade) {
-            const filtered = classes.filter(c => c.t === grade);
+            let filtered;
+            
+            // MODIFIED: Filter logic to handle the new 1-5 group
+            if(grade === 'Grades 1-5') {
+                filtered = classes.filter(c => ['Grade 01', 'Grade 02', 'Grade 03', 'Grade 04', 'Grade 05'].includes(c.t));
+            } else {
+                filtered = classes.filter(c => c.t === grade);
+            }
+            
             showPage('all-classes');
             document.getElementById('all-classes-title').innerHTML = `Classes for <span style="color: var(--orange)">${grade}</span>`;
-            if(filtered.length > 0) {
-                renderClasses('all-classes-grid', filtered);
-            } else {
-                document.getElementById('all-classes-grid').innerHTML = `<p style="text-align:center; grid-column: 1/-1; padding: 50px; font-weight: 700;">No classes currently listed for ${grade}.</p>`;
-            }
+            renderClasses('all-classes-grid', filtered);
+            closeMenu();
         }
 
         function toggleMenu() {
-            document.getElementById('navLinks').classList.toggle('active');
+            const nav = document.getElementById('navLinks');
+            const isOpen = nav.classList.toggle('active');
+            if (isOpen) {
+                document.body.classList.add('no-scroll');
+            } else {
+                document.body.classList.remove('no-scroll');
+            }
         }
+
         function closeMenu() {
             document.getElementById('navLinks').classList.remove('active');
+            const gradeDrop = document.getElementById('gradeDropdown');
+            if(gradeDrop) gradeDrop.classList.remove('open');
+            document.body.classList.remove('no-scroll');
         }
+
         function showPage(page) {
             const pages = ['home-page', 'results-page', 'all-classes-page'];
-            pages.forEach(p => document.getElementById(p).style.display = 'none');
+            pages.forEach(p => {
+                document.getElementById(p).style.display = 'none';
+            });
+            
             document.getElementById(page + '-page').style.display = 'block';
             
             if(page === 'all-classes') {
@@ -329,7 +423,7 @@
             }
             
             closeMenu();
-            window.scrollTo(0,0);
+            window.scrollTo({top: 0, behavior: 'smooth'});
         }
 
         function openPopup(title, price, time, teacher) {
@@ -339,25 +433,42 @@
             document.getElementById('popTeacher').innerText = teacher;
             const modal = document.getElementById('courseModal');
             modal.style.display = 'flex';
+            document.body.classList.add('no-scroll');
             setTimeout(() => modal.classList.add('show'), 10);
         }
+
         function openQuickView(src) {
             const qvModal = document.getElementById('qvModal');
             document.getElementById('qv-img').src = src;
             qvModal.style.display = 'flex';
+            document.body.classList.add('no-scroll');
             setTimeout(() => qvModal.classList.add('show'), 10);
         }
+
         function closePopup(id) {
             const modal = document.getElementById(id);
-            modal.classList.remove('show');
-            setTimeout(() => modal.style.display = 'none', 400);
+            if (modal) {
+                modal.classList.remove('show');
+                setTimeout(() => {
+                    modal.style.display = 'none';
+                    if (!document.querySelector('.modal-overlay.show')) {
+                        document.body.classList.remove('no-scroll');
+                    }
+                }, 400);
+            }
         }
+
         function confirmEnrollment() {
             closePopup('courseModal');
         }
 
-        // Initial Load
-        renderClasses('featured-classes', classes.filter(c => c.t === 'Grade 10' || c.t === 'Grade 11' || c.t === 'A/L Combined Maths'));
+        window.onclick = function(event) {
+            if (!event.target.closest('.dropdown') && !event.target.closest('.menu-toggle')) {
+                closeMenu();
+            }
+        }
+
+        renderClasses('featured-classes', classes.filter((c, i) => i % 10 === 0).slice(0, 3));
     </script>
 </body>
 </html>
