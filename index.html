@@ -142,7 +142,7 @@
         .info-row { display: flex; align-items: center; gap: 15px; padding: 12px 0; border-bottom: 1px solid #f1f5f9; }
         .confirm-btn { background: var(--primary-grad); color: white; padding: 18px; border-radius: 14px; font-weight: 700; border: none; cursor: pointer; width: 100%; margin-top: 30px; }
 
-        .whatsapp-float { position: fixed; bottom: 30px; right: 30px; background: #22c55e; color: white; padding: 16px 40px; border-radius: 100px; font-weight: 700; display: flex; align-items: center; gap: 12px; z-index: 2000; box-shadow: 0 10px 20px rgba(0,0,0,0.2); animation: jump 2.5s infinite ease-in-out; outline: none; }
+        .whatsapp-float { position: fixed; bottom: 30px; right: 10px; background: #22c55e; color: white; padding: 10px 30px; border-radius: 100px; font-weight: 700; display: flex; align-items: center; gap: 12px; z-index: 2000; box-shadow: 0 10px 20px rgba(0,0,0,0.2); animation: jump 2.5s infinite ease-in-out; outline: none; }
 
         @keyframes jump { 0%, 20%, 50%, 80%, 100% { transform: translateY(0); } 40% { transform: translateY(-20px); } 60% { transform: translateY(-10px); } }
 
@@ -311,46 +311,46 @@
 
     <a href="https://wa.me/94773298884" class="whatsapp-float">
         <i class="fab fa-whatsapp" style="font-size: 1.6rem;"></i>
-        <span>Whatsapp!</span>
+        <span>Click to join classes!</span>
     </a>
 
     <script>
-        const classes = [];
-        const instructors = ['Mr. Saman', 'Mrs. Dilini', 'Mr. Perera', 'Mr. Kumara', 'Mr. Silva', 'Mr. Bandara'];
-        const times = ['Monday 4:00 PM', 'Tuesday 3:00 PM', 'Wednesday 3:30 PM', 'Thursday 4:00 PM', 'Friday 5:00 PM', 'Saturday 8:00 AM', 'Sunday 9:00 AM'];
+        /**
+         * EDIT YOUR CLASSES HERE
+         * t = Title (Including Subject)
+         * p = Price (Monthly Fee)
+         * d = Date & Time
+         * i = Instructor Name
+         * img = Image URL
+         */
+        const classes = [
+            { t: 'Grade 05 - Sinhala', p: '1,000', d: 'Monday 4:00 PM', i: 'Mr. Chaminda Senarathna', img: 'https://lh3.googleusercontent.com/pw/AP1GczMvymbNKE7GYgqE3vAOsZJulXRPmT1xwx6cWbObs1ZRcNd9yj39bEQEqPT-Li6DA6fP68FpWaGKVjODb5vQTFX4060ZG9z7Z0YZmhbkUKbWJ0nblBnYr0KA42lrhmDWBY957663F7rQGnHQkaUQ7uk=w685-h913-s-no-gm' },
+            { t: 'Grade 05 - Science', p: '1,000', d: 'Monday 4:00 PM', i: 'Mr. Chaminda Senarathna', img: 'https://lh3.googleusercontent.com/pw/AP1GczMvymbNKE7GYgqE3vAOsZJulXRPmT1xwx6cWbObs1ZRcNd9yj39bEQEqPT-Li6DA6fP68FpWaGKVjODb5vQTFX4060ZG9z7Z0YZmhbkUKbWJ0nblBnYr0KA42lrhmDWBY957663F7rQGnHQkaUQ7uk=w685-h913-s-no-gm' },
+            { t: 'Grade 05 - Maths', p: '1,000', d: 'Monday 4:00 PM', i: 'Mr. Chaminda Senarathna', img: 'https://lh3.googleusercontent.com/pw/AP1GczMvymbNKE7GYgqE3vAOsZJulXRPmT1xwx6cWbObs1ZRcNd9yj39bEQEqPT-Li6DA6fP68FpWaGKVjODb5vQTFX4060ZG9z7Z0YZmhbkUKbWJ0nblBnYr0KA42lrhmDWBY957663F7rQGnHQkaUQ7uk=w685-h913-s-no-gm' },
+            { t: 'Grade 06 - Science', p: '1,500', d: 'Monday 4:00 PM', i: 'Mr. Saman', img: 'https://lh3.googleusercontent.com/pw/AP1GczMvymbNKE7GYgqE3vAOsZJulXRPmT1xwx6cWbObs1ZRcNd9yj39bEQEqPT-Li6DA6fP68FpWaGKVjODb5vQTFX4060ZG9z7Z0YZmhbkUKbWJ0nblBnYr0KA42lrhmDWBY957663F7rQGnHQkaUQ7uk=w685-h913-s-no-gm' },
+            { t: 'Grade 06 - Maths', p: '1,500', d: 'Monday 4:00 PM', i: 'Mr. Saman', img: 'https://lh3.googleusercontent.com/pw/AP1GczMvymbNKE7GYgqE3vAOsZJulXRPmT1xwx6cWbObs1ZRcNd9yj39bEQEqPT-Li6DA6fP68FpWaGKVjODb5vQTFX4060ZG9z7Z0YZmhbkUKbWJ0nblBnYr0KA42lrhmDWBY957663F7rQGnHQkaUQ7uk=w685-h913-s-no-gm' },
+            { t: 'Grade 06 - English', p: '1,500', d: 'Monday 4:00 PM', i: 'Mr. Saman', img: 'https://lh3.googleusercontent.com/pw/AP1GczMvymbNKE7GYgqE3vAOsZJulXRPmT1xwx6cWbObs1ZRcNd9yj39bEQEqPT-Li6DA6fP68FpWaGKVjODb5vQTFX4060ZG9z7Z0YZmhbkUKbWJ0nblBnYr0KA42lrhmDWBY957663F7rQGnHQkaUQ7uk=w685-h913-s-no-gm' },
+            { t: 'Grade 07 - ICT', p: '1,600', d: 'Tuesday 3:00 PM', i: 'Mrs. Dilini', img: 'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=500' },
+            { t: 'Grade 07 - Science', p: '1,600', d: 'Tuesday 3:00 PM', i: 'Mrs. Dilini', img: 'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=500' },
+            { t: 'Grade 07 - Geography', p: '1,600', d: 'Tuesday 3:00 PM', i: 'Mrs. Dilini', img: 'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=500' },
+            { t: 'Grade 08 - Maths', p: '1,700', d: 'Wednesday 3:30 PM', i: 'Mr. Perera', img: 'https://lh3.googleusercontent.com/pw/AP1GczMvymbNKE7GYgqE3vAOsZJulXRPmT1xwx6cWbObs1ZRcNd9yj39bEQEqPT-Li6DA6fP68FpWaGKVjODb5vQTFX4060ZG9z7Z0YZmhbkUKbWJ0nblBnYr0KA42lrhmDWBY957663F7rQGnHQkaUQ7uk=w685-h913-s-no-gm' },
+            { t: 'Grade 08 - Science', p: '1,700', d: 'Wednesday 3:30 PM', i: 'Mr. Perera', img: 'https://lh3.googleusercontent.com/pw/AP1GczMvymbNKE7GYgqE3vAOsZJulXRPmT1xwx6cWbObs1ZRcNd9yj39bEQEqPT-Li6DA6fP68FpWaGKVjODb5vQTFX4060ZG9z7Z0YZmhbkUKbWJ0nblBnYr0KA42lrhmDWBY957663F7rQGnHQkaUQ7uk=w685-h913-s-no-gm' },
+            { t: 'Grade 08 - History', p: '1,700', d: 'Wednesday 3:30 PM', i: 'Mr. Perera', img: 'https://lh3.googleusercontent.com/pw/AP1GczMvymbNKE7GYgqE3vAOsZJulXRPmT1xwx6cWbObs1ZRcNd9yj39bEQEqPT-Li6DA6fP68FpWaGKVjODb5vQTFX4060ZG9z7Z0YZmhbkUKbWJ0nblBnYr0KA42lrhmDWBY957663F7rQGnHQkaUQ7uk=w685-h913-s-no-gm' },
+            { t: 'Grade 09 - Science', p: '1,800', d: 'Thursday 4:00 PM', i: 'Mr. Kumara', img: 'https://lh3.googleusercontent.com/pw/AP1GczMvymbNKE7GYgqE3vAOsZJulXRPmT1xwx6cWbObs1ZRcNd9yj39bEQEqPT-Li6DA6fP68FpWaGKVjODb5vQTFX4060ZG9z7Z0YZmhbkUKbWJ0nblBnYr0KA42lrhmDWBY957663F7rQGnHQkaUQ7uk=w685-h913-s-no-gm' },
+            { t: 'Grade 09 - English', p: '1,800', d: 'Thursday 4:00 PM', i: 'Mr. Kumara', img: 'https://lh3.googleusercontent.com/pw/AP1GczMvymbNKE7GYgqE3vAOsZJulXRPmT1xwx6cWbObs1ZRcNd9yj39bEQEqPT-Li6DA6fP68FpWaGKVjODb5vQTFX4060ZG9z7Z0YZmhbkUKbWJ0nblBnYr0KA42lrhmDWBY957663F7rQGnHQkaUQ7uk=w685-h913-s-no-gm' },
+            { t: 'Grade 09 - Sinhala', p: '1,800', d: 'Thursday 4:00 PM', i: 'Mr. Kumara', img: 'https://lh3.googleusercontent.com/pw/AP1GczMvymbNKE7GYgqE3vAOsZJulXRPmT1xwx6cWbObs1ZRcNd9yj39bEQEqPT-Li6DA6fP68FpWaGKVjODb5vQTFX4060ZG9z7Z0YZmhbkUKbWJ0nblBnYr0KA42lrhmDWBY957663F7rQGnHQkaUQ7uk=w685-h913-s-no-gm' },
+            { t: 'Grade 10 - Mathematics', p: '1,900', d: 'Friday 5:00 PM', i: 'Mr. Silva', img: 'https://lh3.googleusercontent.com/pw/AP1GczMvymbNKE7GYgqE3vAOsZJulXRPmT1xwx6cWbObs1ZRcNd9yj39bEQEqPT-Li6DA6fP68FpWaGKVjODb5vQTFX4060ZG9z7Z0YZmhbkUKbWJ0nblBnYr0KA42lrhmDWBY957663F7rQGnHQkaUQ7uk=w685-h913-s-no-gm' },
+            { t: 'Grade 10 - Science', p: '1,900', d: 'Friday 5:00 PM', i: 'Mr. Silva', img: 'https://lh3.googleusercontent.com/pw/AP1GczMvymbNKE7GYgqE3vAOsZJulXRPmT1xwx6cWbObs1ZRcNd9yj39bEQEqPT-Li6DA6fP68FpWaGKVjODb5vQTFX4060ZG9z7Z0YZmhbkUKbWJ0nblBnYr0KA42lrhmDWBY957663F7rQGnHQkaUQ7uk=w685-h913-s-no-gm' },
+            { t: 'Grade 11 - Mathematics', p: '2,000', d: 'Saturday 8:00 AM', i: 'Mr. Bandara', img: 'https://lh3.googleusercontent.com/pw/AP1GczMvymbNKE7GYgqE3vAOsZJulXRPmT1xwx6cWbObs1ZRcNd9yj39bEQEqPT-Li6DA6fP68FpWaGKVjODb5vQTFX4060ZG9z7Z0YZmhbkUKbWJ0nblBnYr0KA42lrhmDWBY957663F7rQGnHQkaUQ7uk=w685-h913-s-no-gm' },
+            { t: 'Grade 11 - Science', p: '2,000', d: 'Saturday 8:00 AM', i: 'Mr. Bandara', img: 'https://lh3.googleusercontent.com/pw/AP1GczMvymbNKE7GYgqE3vAOsZJulXRPmT1xwx6cWbObs1ZRcNd9yj39bEQEqPT-Li6DA6fP68FpWaGKVjODb5vQTFX4060ZG9z7Z0YZmhbkUKbWJ0nblBnYr0KA42lrhmDWBY957663F7rQGnHQkaUQ7uk=w685-h913-s-no-gm' },
+            { t: 'Grade 10 - History', p: '1,900', d: 'Friday 5:00 PM', i: 'Mr. Silva', img: 'https://lh3.googleusercontent.com/pw/AP1GczMvymbNKE7GYgqE3vAOsZJulXRPmT1xwx6cWbObs1ZRcNd9yj39bEQEqPT-Li6DA6fP68FpWaGKVjODb5vQTFX4060ZG9z7Z0YZmhbkUKbWJ0nblBnYr0KA42lrhmDWBY957663F7rQGnHQkaUQ7uk=w685-h913-s-no-gm' },
+            { t: 'Grade 11 - ICT', p: '2,000', d: 'Saturday 8:00 AM', i: 'Mr. Bandara', img: 'https://lh3.googleusercontent.com/pw/AP1GczMvymbNKE7GYgqE3vAOsZJulXRPmT1xwx6cWbObs1ZRcNd9yj39bEQEqPT-Li6DA6fP68FpWaGKVjODb5vQTFX4060ZG9z7Z0YZmhbkUKbWJ0nblBnYr0KA42lrhmDWBY957663F7rQGnHQkaUQ7uk=w685-h913-s-no-gm' },
+            { t: 'A/L Combined Maths', p: '4,500', d: 'Sunday 9:00 AM', i: 'Mr. Silva', img: 'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=500' }
+        ];
 
-        for (let g = 1; g <= 11; g++) {
-            const gradeName = g < 10 ? `Grade 0${g}` : `Grade ${g}`;
-            for (let i = 1; i <= 3; i++) {
-                classes.push({
-                    t: gradeName, 
-                    p: (1500 + (g * 100)).toLocaleString(), 
-                    d: times[(g + i) % times.length], 
-                    i: instructors[(g + i) % instructors.length], 
-                    img: 'https://images.unsplash.com/photo-1501504905252-473c47e087f8?auto=format&fit=crop&w=500'
-                });
-            }
-        }
-
-        const alSubjects = ['Combined Maths', 'Physics', 'ICT'];
-        alSubjects.forEach((sub, idx) => {
-            for (let i = 1; i <= 3; i++) {
-                classes.push({
-                    t: `A/L ${sub}`, 
-                    p: '4,500', 
-                    d: times[(idx + i) % times.length], 
-                    i: instructors[(idx + i) % instructors.length], 
-                    img: 'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=500'
-                });
-            }
-        });
-
+        // Setup Dropdown links
         const dropdown = document.getElementById('grade-dropdown');
-        
-        // ADDED: Logic to group Grades 1-5
         dropdown.innerHTML += `<a onclick="showGradeClasses('Grades 1-5')">Grades 1-5</a>`;
-        
-        // Individual Grades 6-11
         for (let i = 6; i <= 11; i++) {
             const gradeText = i < 10 ? `Grade 0${i}` : `Grade ${i}`;
             dropdown.innerHTML += `<a onclick="showGradeClasses('${gradeText}')">Grade ${i}</a>`;
@@ -364,12 +364,14 @@
 
         function renderClasses(targetId, dataList) {
             const container = document.getElementById(targetId);
+            if(!container) return;
             container.innerHTML = dataList.map(c => `
                 <div class="card">
                     <div style="height:220px"><img src="${c.img}"></div>
                     <div class="card-body">
-                        <h3>${c.t} Batch (${c.i})</h3>
-                        <p style="color:var(--slate); font-size:0.9rem; margin-top: 10px;">Scheduled for ${c.d}.</p>
+                        <h3 style="font-size: 1.1rem;">${c.t}</h3>
+                        <p style="color: var(--orange); font-weight: 700; font-size: 0.9rem; margin-top: 5px;">${c.i}</p>
+                        <p style="color:var(--slate); font-size:0.85rem; margin-top: 5px;">Scheduled for ${c.d}.</p>
                         <button class="enroll-btn" onclick="openPopup('${c.t}', 'LKR ${c.p}', '${c.d}', '${c.i}')">View Course Details</button>
                     </div>
                 </div>
@@ -378,12 +380,10 @@
 
         function showGradeClasses(grade) {
             let filtered;
-            
-            // MODIFIED: Filter logic to handle the new 1-5 group
             if(grade === 'Grades 1-5') {
-                filtered = classes.filter(c => ['Grade 01', 'Grade 02', 'Grade 03', 'Grade 04', 'Grade 05'].includes(c.t));
+                filtered = classes.filter(c => ['Grade 01', 'Grade 02', 'Grade 03', 'Grade 04', 'Grade 05'].some(g => c.t.includes(g)));
             } else {
-                filtered = classes.filter(c => c.t === grade);
+                filtered = classes.filter(c => c.t.includes(grade));
             }
             
             showPage('all-classes');
@@ -395,11 +395,7 @@
         function toggleMenu() {
             const nav = document.getElementById('navLinks');
             const isOpen = nav.classList.toggle('active');
-            if (isOpen) {
-                document.body.classList.add('no-scroll');
-            } else {
-                document.body.classList.remove('no-scroll');
-            }
+            document.body.classList.toggle('no-scroll', isOpen);
         }
 
         function closeMenu() {
@@ -414,14 +410,12 @@
             pages.forEach(p => {
                 document.getElementById(p).style.display = 'none';
             });
-            
             document.getElementById(page + '-page').style.display = 'block';
             
             if(page === 'all-classes') {
                 document.getElementById('all-classes-title').innerHTML = `All Available <span style="color: var(--orange)">Classes</span>`;
                 renderClasses('all-classes-grid', classes);
             }
-            
             closeMenu();
             window.scrollTo({top: 0, behavior: 'smooth'});
         }
@@ -468,10 +462,7 @@
             }
         }
 
-        renderClasses('featured-classes', classes.filter((c, i) => i % 10 === 0).slice(0, 3));
+        renderClasses('featured-classes', classes.slice(0, 3));
     </script>
 </body>
 </html>
-
-
-
